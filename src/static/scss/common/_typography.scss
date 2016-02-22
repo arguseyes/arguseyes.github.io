@@ -1,0 +1,47 @@
+//
+// Font stacks
+//
+body {
+    font-family: Lato, 'Open Sans', Verdana, sans-serif;
+    line-height: 1.4;
+    color: #444;
+}
+pre, code,
+pre code {
+    font-family: 'Ubuntu Mono', Monaco, Consolas, 'Courier New', monospace;
+}
+
+//
+// Headings
+//
+h1, h2, h3, h4, h5, h6 {
+    padding-left: .4em;
+    border-left: 8px solid $color-ae-normal;
+}
+
+//
+// Links
+//
+a[href] {
+    color: $color-ae-dark;
+}
+
+//
+// Code
+//
+code {
+    padding: 2px 5px 3px;
+    border: 1px solid $color-ae-white;
+    border-radius: 3px;
+    background: lighten($color-ae-white, 2%);
+    font-size: 17px;
+    font-weight: normal;
+}
+pre code {
+    display: block;
+    overflow-x: scroll;
+    padding: 7px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 1.3;
+}

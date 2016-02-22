@@ -1,0 +1,11 @@
+.header-logo {
+
+    margin: 10px 0 0;
+    @media (min-width: $layout-bp-s) {
+        float: left;
+    }
+
+    a[href] {
+        display: block;
+    }
+}

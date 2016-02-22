@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Argus Eyes</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:100,300,400,400italic,700,700italic|Ubuntu+Mono:400,400italic,700">
+    <link rel="stylesheet" href="/static/css/all.css">
+    <link rel="apple-touch-icon" sizes="57x57" href="/static/img/favicon/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/static/img/favicon/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/static/img/favicon/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/static/img/favicon/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/static/img/favicon/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/static/img/favicon/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/static/img/favicon/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/static/img/favicon/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/static/img/favicon/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/static/img/favicon/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/static/img/favicon/favicon-194x194.png" sizes="194x194">
+<link rel="icon" type="image/png" href="/static/img/favicon/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/static/img/favicon/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/static/img/favicon/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/static/img/favicon/manifest.json">
+<link rel="mask-icon" href="/static/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/static/img/favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-TileImage" content="/static/img/favicon/mstile-144x144.png">
+<meta name="msapplication-config" content="/static/img/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+
+    <script>
+        (function(d) {
+            if (!('querySelector' in d && 'addEventListener' in window)) return;
+            d.addEventListener('DOMContentLoaded', function() {
+                var s = d.createElement('script');
+                s.setAttribute('src', '../static/js/vendor/requirejs/require.js');
+                s.setAttribute('data-main', '../static/js/main');
+                d.body.appendChild(s);
+            });
+        }(document));
+    </script>
+</head>
+<body>
+
+    <div class="layout__container">
+        
+    <header class="layout__header">
+        <figure class="header-logo">
+    <a href="/"><img src="/static/img/argus-eyes-line.svg" alt="Argus Eyes logo"></a>
+</figure>
+
+        
+    
+    
+    
+    <nav class="nav-main">
+        <ol>
+            <li><a href="/" class="nav-main__item">Home</a></li>
+            <li><a href="/guide.html" class="nav-main__item">Guide</a></li>
+            <li><a href="/reference.html" class="nav-main__item nav-main__item_is-active">Reference</a></li>
+            <li><a href="http://github.com/arguseyes/argus-eyes" class="nav-main__item nav-main__item_github" title="Github" target="_blank"></a></li>
+        </ol>
+    </nav>
+
+    </header>
+        
+    <main class="layout__main layout__main_has-aside">
+        <article>
+            <!-- start -->
+<h2 id="reference">Reference</h2>
+<h3 id="config">Config</h3>
+<p>Argus eyes will look in the current working directory for a file named <strong><code>argus-eyes.json</code></strong>. This file contains your
+sizes, pages and components. You can specify a different location file using the <strong><code>--config</code></strong> argument, as described
+in <a href="#options">Options</a>.</p>
+<p>The config needs to be valid <a href="http://www.json.org/">JSON</a>, and it needs to obey this format specification:</p>
+<pre><code class="lang-js">{
+  sizes: [
+    <span class="hljs-built_in">String</span>               <span class="hljs-comment">// Size string, example: "1024x768"</span>
+    <span class="hljs-comment">// ...</span>
+  ],
+  pages: [
+    {
+      name: <span class="hljs-built_in">String</span>,      <span class="hljs-comment">// Identifier, used in filenames</span>
+      url: <span class="hljs-built_in">String</span>,       <span class="hljs-comment">// Valid URL</span>
+      components: [
+        <span class="hljs-built_in">String</span>           <span class="hljs-comment">// Component identifier</span>
+        <span class="hljs-comment">// ...</span>
+      ]
+    }
+    <span class="hljs-comment">// ...</span>
+  ],
+  components: [
+    {
+      name: <span class="hljs-built_in">String</span>,      <span class="hljs-comment">// Identifier, used in page objects and filenames</span>
+      selector: <span class="hljs-built_in">String</span>,  <span class="hljs-comment">// CSS selector, to clip the screenshot</span>
+      ignore: [          <span class="hljs-comment">// Optional array of excluded child elements</span>
+        <span class="hljs-built_in">String</span>           <span class="hljs-comment">// CSS selector, to `display:none` a child element</span>
+        <span class="hljs-comment">// ...</span>
+      ]
+    }
+    <span class="hljs-comment">// ...</span>
+  ],
+  finished-when: <span class="hljs-built_in">String</span>  <span class="hljs-comment">// [Optional] Valid JavaScript return statement</span>
+}
+</code></pre>
+<p>If provided, the <code>finished-when</code> string must contain a return statement that evaluates to <code>true</code> whenever the page is
+ready to be captured, <code>false</code> if it&#39;s not yet. If omitted, it defaults to <code>return true</code>. Internally, this string is
+passed as the only argument to the
+<a href="http://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function"><code>Function()</code> function</a>,
+thus an entire function body is expected and multiple lines are allowed.</p>
+<h3 id="usage">Usage</h3>
+<h4 id="add">Add</h4>
+<p>Run argus eyes and save all the screenshots under <strong><code>.argus-eyes/&lt;name&gt;/</code></strong></p>
+<h4 id="compare">Compare</h4>
+<p>Compare the two sets of screenshots, creating overlay-images and reporting any difference. The process will exit with
+code 0 when no significant differences were found, code 1 when differences were found.</p>
+<h4 id="configtest">Configtest</h4>
+<p>Run a config file syntax and test. It parses the config file and either reports <em>Config valid</em> or detailed information
+about the error.</p>
+<h3 id="options">Options</h3>
+<p>Argus eyes can take several optional arguments on the CLI. Because <code>add</code> and <code>compare</code> take positional arguments, any
+of these options must be placed last.</p>
+<h4 id="config-file">Config file</h4>
+<p><em>Default:</em> <strong><code>argus-eyes.json</code></strong></p>
+<p>Use a different config file.</p>
+<pre><code class="lang-bash">$ argus-eyes add feature/navigation --config=config.json
+</code></pre>
+<h4 id="threshold">Threshold</h4>
+<p><em>Default:</em> 2</p>
+<p>Set the threshold for comparison differences, expects a percentage between 0 and 100. If the difference between 2 files
+is bigger than this percentage, it will be treated as different and reported as such.</p>
+<p>When comparing screenshots, argus eyes checks if all pixels in screenshots are identical. The difference is calculated
+by dividing the number of different pixels by the total number of pixels, giving a percentage. The image is considered
+different when this percentage exceeds the threshold percentage.</p>
+<p><strong>Be advised</strong>: You can <a href="#config">exclude html elements</a> from being captured! You might want to look into that before
+increasing the threshold, since that will also increase the chance of unintended changes getting through.</p>
+<pre><code class="lang-bash">$ argus-eyes compare develop feature/navigation --threshold=10
+</code></pre>
+<h4 id="base">Base</h4>
+<p><em>Default:</em> <strong><code>.argus-eyes</code></strong></p>
+<p>Use a different base directory for storing the screenshots and comparison results.</p>
+<pre><code class="lang-bash">$ argus-eyes add develop --base==visual-regression
+</code></pre>
+<h4 id="imagemagick">ImageMagick</h4>
+<p>Set the path where the ImageMagick <code>compare</code>, <code>convert</code> and <code>identify</code> executables can be found. This path needs to end
+with a slash (or backslash on Windows). It is empty by default, expecting the executables in your <code>PATH</code> variable.</p>
+<pre><code class="lang-bash">$ argus-eyes add develop --im=<span class="hljs-string">"/usr/local/Cellar/imagemagick/6.9.2-5/bin/"</span>
+$ argus-eyes add develop --im=<span class="hljs-string">"C:\Program Files\ImageMagick\"</span>
+</code></pre>
+<h4 id="verbose">Verbose</h4>
+<p>Turn on verbose output.</p>
+<pre><code class="lang-bash">$ argus-eyes compare develop feature/navigation --verbose
+</code></pre>
+<h4 id="no-color">No color</h4>
+<p>Turn off colored output. Output is colored by default.</p>
+<pre><code class="lang-bash">$ argus-eyes add develop --no-color
+</code></pre>
+<h4 id="help">Help</h4>
+<p>Print usage information.</p>
+<pre><code class="lang-bash">$ argus-eyes --help
+</code></pre>
+<h4 id="version">Version</h4>
+<p>Print version.</p>
+<pre><code class="lang-bash">$ argus-eyes --version
+</code></pre>
+<!-- end -->
+        </article>
+    </main>
+    <aside class="layout__aside">
+        
+    <nav class="nav-aside">
+        <ol>
+            <li class="nav-aside_lvl1">
+                    <a href="#reference">Reference</a>
+                </li>
+            <li class="nav-aside_lvl2">
+                    <a href="#config">Config</a>
+                </li>
+            <li class="nav-aside_lvl2">
+                    <a href="#usage">Usage</a>
+                </li>
+            <li class="nav-aside_lvl3">
+                    <a href="#add">Add</a>
+                </li>
+            <li class="nav-aside_lvl3">
+                    <a href="#compare">Compare</a>
+                </li>
+            <li class="nav-aside_lvl3">
+                    <a href="#configtest">Configtest</a>
+                </li>
+            <li class="nav-aside_lvl2">
+                    <a href="#options">Options</a>
+                </li>
+            <li class="nav-aside_lvl3">
+                    <a href="#config-file">Config file</a>
+                </li>
+            <li class="nav-aside_lvl3">
+                    <a href="#threshold">Threshold</a>
+                </li>
+            <li class="nav-aside_lvl3">
+                    <a href="#base">Base</a>
+                </li>
+            <li class="nav-aside_lvl3">
+                    <a href="#imagemagick">ImageMagick</a>
+                </li>
+            <li class="nav-aside_lvl3">
+                    <a href="#verbose">Verbose</a>
+                </li>
+            <li class="nav-aside_lvl3">
+                    <a href="#no-color">No color</a>
+                </li>
+            <li class="nav-aside_lvl3">
+                    <a href="#help">Help</a>
+                </li>
+            <li class="nav-aside_lvl3">
+                    <a href="#version">Version</a>
+                </li>
+            
+        </ol>
+    </nav>
+
+    </aside>
+
+    </div>
+
+</body>
+</html>

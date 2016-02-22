@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Argus Eyes</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:100,300,400,400italic,700,700italic|Ubuntu+Mono:400,400italic,700">
+    <link rel="stylesheet" href="/static/css/all.css">
+    <link rel="apple-touch-icon" sizes="57x57" href="/static/img/favicon/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/static/img/favicon/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/static/img/favicon/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/static/img/favicon/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/static/img/favicon/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/static/img/favicon/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/static/img/favicon/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/static/img/favicon/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/static/img/favicon/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/static/img/favicon/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/static/img/favicon/favicon-194x194.png" sizes="194x194">
+<link rel="icon" type="image/png" href="/static/img/favicon/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/static/img/favicon/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/static/img/favicon/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/static/img/favicon/manifest.json">
+<link rel="mask-icon" href="/static/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/static/img/favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-TileImage" content="/static/img/favicon/mstile-144x144.png">
+<meta name="msapplication-config" content="/static/img/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+
+    <script>
+        (function(d) {
+            if (!('querySelector' in d && 'addEventListener' in window)) return;
+            d.addEventListener('DOMContentLoaded', function() {
+                var s = d.createElement('script');
+                s.setAttribute('src', '../static/js/vendor/requirejs/require.js');
+                s.setAttribute('data-main', '../static/js/main');
+                d.body.appendChild(s);
+            });
+        }(document));
+    </script>
+</head>
+<body>
+
+    <div class="layout__container">
+        
+    <header class="layout__header">
+        <figure class="header-logo">
+    <a href="/"><img src="/static/img/argus-eyes-line.svg" alt="Argus Eyes logo"></a>
+</figure>
+
+        
+    
+    
+    
+    <nav class="nav-main">
+        <ol>
+            <li><a href="/" class="nav-main__item">Home</a></li>
+            <li><a href="/guide.html" class="nav-main__item nav-main__item_is-active">Guide</a></li>
+            <li><a href="/reference.html" class="nav-main__item">Reference</a></li>
+            <li><a href="http://github.com/arguseyes/argus-eyes" class="nav-main__item nav-main__item_github" title="Github" target="_blank"></a></li>
+        </ol>
+    </nav>
+
+    </header>
+        
+    <main class="layout__main layout__main_has-aside">
+        <article>
+            <!-- start -->
+<h2 id="guide">Guide</h2>
+<h3 id="install">Install</h3>
+<ul>
+<li>Install <a href="http://nodejs.org/">Node.js</a>, at least v4</li>
+<li>Install <a href="http://www.imagemagick.org/">ImageMagick</a></li>
+<li>Install argus-eyes using npm:</li>
+</ul>
+<pre><code class="lang-bash">$ npm install argus-eyes -g
+</code></pre>
+<p><em>Note:</em><br>For OSX we recommend installing ImageMagick with <a href="http://brew.sh/">Homebrew</a>: <code>$ brew install imagemagick</code><br>For Windows we recommend install ImageMagick with <a href="https://chocolatey.org/">Chocolatey</a>: <code>$ choco install imagemagick</code></p>
+<h3 id="step-1-setup-config-file">Step 1: Setup config file</h3>
+<p>Before argus eyes can measure visual differences, it needs a list of pages and components. By
+default argus eyes expects an <strong><code>argus-eyes.json</code></strong> file in the current working directory.</p>
+<p>The config file must be a valid JSON object, containing 3 arrays: <strong><code>sizes</code></strong>, <strong><code>pages</code></strong> and
+<strong><code>components</code></strong>. Sizes are simple strings. Page objects require a name, url and list of components. Components require
+a name and a CSS-selector. Components can optionally take a list of selectors of elements to ignore, this selector is
+appended to the component selector. See the Reference section for a more detailed format description.</p>
+<p><strong>Example config file:</strong></p>
+<pre><code class="lang-json">{
+  "<span class="hljs-attr">sizes</span>": [<span class="hljs-string">"320x480"</span>, <span class="hljs-string">"1280x768"</span>],
+  "<span class="hljs-attr">pages</span>": [ {
+      "<span class="hljs-attr">name</span>": <span class="hljs-string">"homepage"</span>,
+      "<span class="hljs-attr">url</span>": <span class="hljs-string">"http://localhost:3000/"</span>,
+      "<span class="hljs-attr">components</span>": [ <span class="hljs-string">"navigation"</span>, <span class="hljs-string">"news-items"</span> ]
+    }, {
+      "<span class="hljs-attr">name</span>": <span class="hljs-string">"contact"</span>,
+      "<span class="hljs-attr">url</span>": <span class="hljs-string">"http://localhost:3000/contact.html"</span>,
+      "<span class="hljs-attr">components</span>": [ <span class="hljs-string">"navigation"</span> ]
+    } ],
+  "<span class="hljs-attr">components</span>": [ {
+      "<span class="hljs-attr">name</span>": <span class="hljs-string">"navigation"</span>,
+      "<span class="hljs-attr">selector</span>": <span class="hljs-string">".nav"</span>
+    }, {
+      "<span class="hljs-attr">name</span>": <span class="hljs-string">"news-items"</span>,
+      "<span class="hljs-attr">selector</span>": <span class="hljs-string">".news-items"</span>,
+      "<span class="hljs-attr">ignore</span>": [ <span class="hljs-string">".last-updated"</span> ]
+    } ]
+}
+</code></pre>
+<h3 id="step-2-take-screenshots">Step 2: Take screenshots</h3>
+<p>After setting up the JSON, argus eyes can be put to work. Let&#39;s create your first set of screenshots of the components
+we specified. To do that, you can use the <strong><code>argus-eyes add</code></strong> command:</p>
+<pre><code class="lang-bash">$ argus-eyes add &lt;name&gt;
+</code></pre>
+<p>It&#39;s best to name your set of screenshots semantically, after your current git branch for example.</p>
+<p>Argus eyes now creates a folder called <strong><code>.argus-eyes/&lt;name&gt;/</code></strong>, and saves the screenshots of all components specified
+in the config file.</p>
+<p>Now, you can switch branches and save another set of screenshots.</p>
+<h3 id="step-3-test-for-visual-differences">Step 3: Test for visual differences</h3>
+<p>When any 2 sets of screenshots were created, argus eyes can compare them for visual differences. Comparison is done with
+the <strong><code>argus-eyes compare</code></strong> command:</p>
+<pre><code class="lang-bash">$ argus-eyes compare &lt;left&gt; &lt;right&gt;
+</code></pre>
+<p>If visual differences between supposedly identical components are found, a new folder is created. This folder contains
+images of the offending components, highlighting their differences in red.</p>
+<p><em>Note:</em> Please make sure to add <strong><code>&#39;.argus-eyes&#39;</code></strong> to your <strong><code>.gitignore</code></strong>!</p>
+<h3 id="gitflow-testing-separate-branches">Gitflow: Testing separate branches</h3>
+<p>Argus eyes is especially useful for checking visual regression between different branches. Say you&#39;re working on a
+feature branch and you want to make sure your changes have no unintended side effects:</p>
+<p><strong>On the <code>feature/navigation</code> branch:</strong></p>
+<pre><code class="lang-bash">$ argus-eyes add feature/navigation
+</code></pre>
+<p><strong>On the <code>develop</code> branch:</strong></p>
+<pre><code class="lang-bash">$ argus-eyes add develop
+$ argus-eyes compare develop feature/navigation
+</code></pre>
+<p>If any differences are found, the visual diff images are stored in <strong><code>.argus-eyes/diff_develop_feature-navigation/</code></strong>
+<!-- end --></p>
+
+        </article>
+    </main>
+    <aside class="layout__aside">
+        
+    <nav class="nav-aside">
+        <ol>
+            <li class="nav-aside_lvl1">
+                    <a href="#guide">Guide</a>
+                </li>
+            <li class="nav-aside_lvl2">
+                    <a href="#install">Install</a>
+                </li>
+            <li class="nav-aside_lvl2">
+                    <a href="#step-1-setup-config-file">Step 1: Setup config file</a>
+                </li>
+            <li class="nav-aside_lvl2">
+                    <a href="#step-2-take-screenshots">Step 2: Take screenshots</a>
+                </li>
+            <li class="nav-aside_lvl2">
+                    <a href="#step-3-test-for-visual-differences">Step 3: Test for visual differences</a>
+                </li>
+            <li class="nav-aside_lvl2">
+                    <a href="#gitflow-testing-separate-branches">Gitflow: Testing separate branches</a>
+                </li>
+            
+        </ol>
+    </nav>
+
+    </aside>
+
+    </div>
+
+</body>
+</html>

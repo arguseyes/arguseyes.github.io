@@ -1,0 +1,32 @@
+.nav-aside {
+    margin-left: -15px;
+
+    ol {
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        list-style: none;
+        display: block;
+    }
+
+    a[href] {
+        display: block;
+        padding: 2px 0;
+        border-left: 2px solid transparent;
+        text-decoration: none;
+        font-weight: 300;
+
+        color: $color-ae-light;
+        &:hover,
+        &:active {
+            border-left-color: $color-ae-normal;
+            color: inherit;
+        }
+    }
+
+    .nav-aside_lvl1 a { padding-left: 10px; }
+    .nav-aside_lvl2 a { padding-left: 25px; }
+    .nav-aside_lvl3 a { padding-left: 40px; }
+}

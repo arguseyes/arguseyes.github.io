@@ -1,0 +1,21 @@
+{% extends '_layout.html' %}
+{% import '../components/nav-main/nav-main.html' as navMain %}
+{% import '../components/nav-aside/nav-aside.html' as navAside %}
+
+{%- block header %}
+    <header class="layout__header">
+        {% include '../components/header-logo/header-logo.html' %}
+        {{ navMain.nav('guide', 'main') }}
+    </header>
+{% endblock -%}
+
+{%- block main %}
+    <main class="layout__main layout__main_has-aside">
+        <article>
+            {{ markdown(readme.guide) }}
+        </article>
+    </main>
+    <aside class="layout__aside">
+        {{ navAside.nav(headers.guide) }}
+    </aside>
+{% endblock -%}

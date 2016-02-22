@@ -1,0 +1,18 @@
+{% extends '_layout.html' %}
+{% import '../components/nav-main/nav-main.html' as navMain %}
+
+{%- block header %}
+    <header class="layout__header layout__main_has-hero">
+        {{ navMain.nav('home', 'home') }}
+    </header>
+{% endblock -%}
+
+{%- block main %}
+    <main class="layout__main layout__main_has-hero">
+        {% include '../components/hero/hero.html' %}
+        <article>
+            {{ markdown(readme.overview) }}
+            {{ markdown(readme.introduction) }}
+        </article>
+    </main>
+{% endblock -%}

@@ -1,1 +1,107 @@
-arguseyes.github.io
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Argus Eyes</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:100,300,400,400italic,700,700italic|Ubuntu+Mono:400,400italic,700">
+    <link rel="stylesheet" href="/static/css/all.css">
+    <link rel="apple-touch-icon" sizes="57x57" href="/static/img/favicon/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/static/img/favicon/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/static/img/favicon/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/static/img/favicon/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/static/img/favicon/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/static/img/favicon/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/static/img/favicon/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/static/img/favicon/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/static/img/favicon/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/static/img/favicon/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/static/img/favicon/favicon-194x194.png" sizes="194x194">
+<link rel="icon" type="image/png" href="/static/img/favicon/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/static/img/favicon/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/static/img/favicon/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/static/img/favicon/manifest.json">
+<link rel="mask-icon" href="/static/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/static/img/favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-TileImage" content="/static/img/favicon/mstile-144x144.png">
+<meta name="msapplication-config" content="/static/img/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+
+    <script>
+        (function(d) {
+            if (!('querySelector' in d && 'addEventListener' in window)) return;
+            d.addEventListener('DOMContentLoaded', function() {
+                var s = d.createElement('script');
+                s.setAttribute('src', '../static/js/vendor/requirejs/require.js');
+                s.setAttribute('data-main', '../static/js/main');
+                d.body.appendChild(s);
+            });
+        }(document));
+    </script>
+</head>
+<body>
+
+    <div class="layout__container">
+        
+    <header class="layout__header layout__main_has-hero">
+        
+    
+    
+    
+    <nav class="nav-home">
+        <ol>
+            <li><a href="/" class="nav-home__item nav-home__item_is-active">Home</a></li>
+            <li><a href="/guide.html" class="nav-home__item">Guide</a></li>
+            <li><a href="/reference.html" class="nav-home__item">Reference</a></li>
+            <li><a href="http://github.com/arguseyes/argus-eyes" class="nav-home__item nav-home__item_github" title="Github" target="_blank"></a></li>
+        </ol>
+    </nav>
+
+    </header>
+        
+    <main class="layout__main layout__main_has-hero">
+        <div class="hero">
+    <div class="hero__logo"></div>
+    <h1 class="hero__title">A lightweight CLI tool for visual regression testing</h1>
+    <pre class="hero__install"><code>$ npm install argus-eyes -g</code></pre>
+</div>
+
+        <article>
+            <!-- start -->
+<p>Argus eyes does 3 things for you:  </p>
+<ol>
+<li>Take screenshots of UI components in different views and branches</li>
+<li>Test the screenshots for visual differences</li>
+<li>Create images of the visual differences</li>
+</ol>
+<p>Screenshots are caputured with <a href="http://phantomjs.org/">PhantomJS</a>, comparing sceenshots is done using
+<a href="http://www.imagemagick.org/">ImageMagick</a>.
+<!-- end --></p>
+
+            <!-- start -->
+<h2 id="introduction">Introduction</h2>
+<p>After installing, you want to tell argus eyes which pages and which components to check for visual regression.
+Argus eyes works by going over a straightforward JSON file containing the resolutions you want to capture, as well as
+the pages with their url&#39;s, and the components with their CSS-selectors.</p>
+<p>Once argus eyes knows where to find the components, it&#39;s time for some command line action. The first command you want
+to use is <code>$ argus-eyes add master</code>. This makes argus eyes go over the config file and take screenshots of
+all specified components in there. The screenshots are saved in <strong><code>.argus-eyes/master</code></strong> and this set of screenshots can
+be compared with another set.</p>
+<p>Say you want to compare the components in your dev branch with those in your master branch. Now is the time to switch
+branches and do a new <code>$ argus-eyes add dev</code>.</p>
+<p>To compare the 2 sets you run <code>$ argus-eyes compare master dev</code>, that&#39;s it! Argus eyes now checks all supposedly
+identical screenshots for visual differences. If differences were found, a new folder <strong><code>.argus-eyes/diff_master_dev</code></strong>
+is created. This folder contains overlay-images of the offending components, highlighting their differences in red.
+<!-- end --></p>
+
+        </article>
+    </main>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+{% macro nav(headers) %}
+    <nav class="nav-aside">
+        <ol>
+            {% for header in headers -%}
+                <li class="nav-aside_lvl{{ header.lvl - 1 }}">
+                    <a href="#{{ header.slug }}">{{ header.title }}</a>
+                </li>
+            {%- endfor %}
+        </ol>
+    </nav>
+{% endmacro %}
