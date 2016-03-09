@@ -1,4 +1,22 @@
 //
+// Base font size and scaling
+//
+html {
+    font-size: 16px;
+}
+
+@media (min-width: 600px) and (max-width: 1024px) {
+    html {
+        font-size: calc( 16px + (20 - 16) * ( (100vw - 600px) / ( 1024 - 600) ));
+    }
+}
+@media (min-width: 1024px) {
+    html {
+        font-size: 20px;
+    }
+}
+
+//
 // Font stacks
 //
 body {
@@ -30,18 +48,17 @@ a[href] {
 // Code
 //
 code {
-    padding: 2px 5px 3px;
+    padding: .125em .3125em .1875em;
     border: 1px solid $color-ae-white;
-    border-radius: 3px;
+    border-radius: .1875em;
     background: lighten($color-ae-white, 2%);
-    font-size: 17px;
     font-weight: normal;
 }
 pre code {
     display: block;
     overflow-x: scroll;
-    padding: 7px 10px;
-    border-radius: 5px;
-    font-size: 14px;
+    padding: .5em .75rem;
+    border-radius: .3125em;
+    font-size: .875em;
     line-height: 1.3;
 }

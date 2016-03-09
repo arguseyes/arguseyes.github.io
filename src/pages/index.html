@@ -2,13 +2,13 @@
 {% import '../components/nav-main/nav-main.html' as navMain %}
 
 {%- block header %}
-    <header class="layout__header layout__main_has-hero">
+    <header class="layout__header">
         {{ navMain.nav('home', 'home') }}
     </header>
 {% endblock -%}
 
 {%- block main %}
-    <main class="layout__main layout__main_has-hero">
+    <main class="layout__main">
         {% include '../components/hero/hero.html' %}
         <article>
             <h1>Overview</h1>

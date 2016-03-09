@@ -11,8 +11,10 @@
     </header>
 {% endblock -%}
 
+{%- block layoutExtraClass %}layout__container_has-aside{% endblock -%}
+
 {%- block main %}
-    <main class="layout__main layout__main_has-aside">
+    <main class="layout__main">
         <article>
             {{ markdown(readme.guide) }}
         </article>
