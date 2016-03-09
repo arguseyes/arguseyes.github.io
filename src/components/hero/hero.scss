@@ -1,6 +1,6 @@
 .hero {
 
-    padding: 40px;
+    padding: 30px;
     background: $color-ae-dark;
     text-align: center;
 
@@ -24,7 +24,7 @@
         @media (min-width: $layout-bp-xs) {
             font-size: 32px;
         }
-        font-weight: 100;
+        font-weight: 300;
         color: $color-ae-white;
     }
 
