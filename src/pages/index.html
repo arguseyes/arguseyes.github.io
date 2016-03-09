@@ -15,7 +15,7 @@
             {{ markdown(readme.overview) }}
             {{ markdown(readme.introduction) }}
             <h2>Example</h2>
-            <a class="fullimg" href="/static/img/argus-eyes-example.png"><img style="max-width:865px" src="/static/img/argus-eyes-example.png"/></a>
+            {% include '../components/example-figure/example-figure.html' %}
         </article>
     </main>
 {% endblock -%}

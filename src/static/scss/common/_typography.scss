@@ -25,12 +25,6 @@ h1, h2, h3, h4, h5, h6 {
 a[href] {
     color: $color-ae-dark;
 }
-a[href].fullimg {
-    display: block;
-    img {
-        width: 100%;
-    }
-}
 
 //
 // Code
