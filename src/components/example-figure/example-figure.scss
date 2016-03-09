@@ -1,0 +1,38 @@
+.example-figure,
+.figure-part {
+    margin: 0;
+}
+
+.example-figure {
+    @media (min-width: $layout-bp-s) {
+        display: -webkit-box;
+        display: flex;
+    }
+}
+
+.example-figure__caption {
+    display: none;
+}
+
+.figure-part {
+    border: 1px solid #ddd;
+    + .figure-part {
+        border-width: 0 1px 1px 1px;
+    }
+    @media (min-width: $layout-bp-s) {
+        + .figure-part {
+            border-width: 1px 1px 1px 0;
+        }
+    }
+    text-align: center;
+
+    img {
+        max-width: 100%;
+    }
+}
+
+.figure-part__caption {
+    padding: .5em;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+}
