@@ -15,7 +15,8 @@
   },
   "contributors": [
     "Bran van der Meer <branmovic@gmail.com> (http://bran.name/)",
-    "Marius de Corte <mdecorte@gmail.com> (http://mariusdecorte.nl)"
+    "Marius de Corte <mdecorte@gmail.com> (http://mariusdecorte.nl)",
+    "Sybren Wartna <sybren@gmail.com> (http://wheressyb.nl/)"
   ],
   "license": "CC-BY-4.0",
   "devDependencies": {
