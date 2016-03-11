@@ -7,7 +7,7 @@
     <meta name="description" content="A lightweight CLI tool for visual regression testing">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:100,300,400,400italic,700,700italic|Ubuntu+Mono:400,400italic,700">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,400,400italic,700,700italic|Ubuntu+Mono:400,400italic,700">
     <link rel="stylesheet" href="/static/css/all.css">
     <link rel="apple-touch-icon" sizes="57x57" href="/static/img/favicon/apple-touch-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/static/img/favicon/apple-touch-icon-60x60.png">
@@ -33,9 +33,9 @@
 
 </head>
 <body>
-    <div class="layout__container">
+    <div class="layout__container ">
         
-    <header class="layout__header layout__main_has-hero">
+    <header class="layout__header">
         
     
     
@@ -51,10 +51,10 @@
 
     </header>
         
-    <main class="layout__main layout__main_has-hero">
+    <main class="layout__main">
         <div class="hero">
     <div class="hero__logo"></div>
-    <h1 class="hero__title">A lightweight CLI tool for visual regression testing</h1>
+    <h1 class="hero__title">A lightweight CLI tool for visual&nbsp;regression&nbsp;testing</h1>
     <pre class="hero__install"><code>$ npm install argus-eyes -g</code></pre>
 </div>
 
@@ -88,7 +88,22 @@ is created. This folder contains overlay-images of the offending components, hig
 <!-- end --></p>
 
             <h2>Example</h2>
-            <a class="fullimg" href="/static/img/argus-eyes-example.png"><img style="max-width:865px" src="/static/img/argus-eyes-example.png"/></a>
+            <figure class="example-figure" role="group">
+    <figcaption class="example-figure__caption">Example of argus eyes visual regression testing</figcaption>
+    <figure class="figure-part" role="group">
+        <figcaption class="figure-part__caption">baseline</figcaption>
+        <img src="/static/img/nav-menu-1.png">
+    </figure>
+    <figure class="figure-part" role="group">
+        <figcaption class="figure-part__caption">current</figcaption>
+        <img src="/static/img/nav-menu-2.png">
+    </figure>
+    <figure class="figure-part" role="group">
+        <figcaption class="figure-part__caption">diff</figcaption>
+        <img src="/static/img/nav-menu-3.png">
+    </figure>
+</figure>
+
         </article>
     </main>
 

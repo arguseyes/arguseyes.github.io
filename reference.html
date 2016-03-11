@@ -7,7 +7,7 @@
     <meta name="description" content="A lightweight CLI tool for visual regression testing">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:100,300,400,400italic,700,700italic|Ubuntu+Mono:400,400italic,700">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,400,400italic,700,700italic|Ubuntu+Mono:400,400italic,700">
     <link rel="stylesheet" href="/static/css/all.css">
     <link rel="apple-touch-icon" sizes="57x57" href="/static/img/favicon/apple-touch-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/static/img/favicon/apple-touch-icon-60x60.png">
@@ -33,17 +33,17 @@
 
 </head>
 <body>
-    <div class="layout__container">
-
+    <div class="layout__container layout__container_has-aside">
+        
     <header class="layout__header">
         <figure class="header-logo">
     <a href="/"><img src="/static/img/argus-eyes-line.svg" alt="Argus Eyes logo"></a>
 </figure>
 
-
-
-
-
+        
+    
+    
+    
     <nav class="nav-main">
         <ol>
             <li><a href="/" class="nav-main__item">Home</a></li>
@@ -54,8 +54,8 @@
     </nav>
 
     </header>
-
-    <main class="layout__main layout__main_has-aside">
+        
+    <main class="layout__main">
         <article>
             <!-- start -->
 <h2 id="reference">Reference</h2>
@@ -117,7 +117,7 @@ of these options must be placed last.</p>
 <pre><code class="lang-bash">$ argus-eyes add feature/navigation --config=config.json
 </code></pre>
 <h4 id="threshold">Threshold</h4>
-<p><em>Default:</em> 2</p>
+<p><em>Default:</em> 0</p>
 <p>Set the threshold for comparison differences, expects a percentage between 0 and 100. If the difference between 2 files
 is bigger than this percentage, it will be treated as different and reported as such.</p>
 <p>When comparing screenshots, argus eyes checks if all pixels in screenshots are identical. The difference is calculated
@@ -158,7 +158,7 @@ $ argus-eyes add develop --im=<span class="hljs-string">"C:\Program Files\ImageM
         </article>
     </main>
     <aside class="layout__aside">
-
+        
     <nav class="nav-aside">
         <ol>
             <li class="nav-aside_lvl1">
@@ -206,7 +206,7 @@ $ argus-eyes add develop --im=<span class="hljs-string">"C:\Program Files\ImageM
             <li class="nav-aside_lvl3">
                     <a href="#version">Version</a>
                 </li>
-
+            
         </ol>
     </nav>
 
