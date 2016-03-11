@@ -1,28 +1,38 @@
 .hero {
-
-    padding: 30px;
+    margin-bottom: 2em;
+    padding: 2em;
     background: $color-ae-dark;
     text-align: center;
 
-    .hero__logo {
-        height: 150px;
-        @media (min-width: $layout-bp-xs) { height: 200px; }
-        @media (min-width: $layout-bp-s) { height: 300px; }
+    @media (min-width: $layout-bp-m) {
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 30em;
+            background: $color-ae-dark;
+            margin-top: -2em;
+            z-index: -1;
+        }
+    }
 
+    .hero__logo {
+        height: 10em;
+        @media (min-width: $layout-bp-xs) { height: 12.5em; }
+
+        margin-bottom: 3em;
         background: url('/static/img/argus-eyes-stacked-white.svg') center center no-repeat;
-        background-size: 200px;
-        @media (min-width: $layout-bp-xs) { background-size: 260px; }
-        @media (min-width: $layout-bp-s) { background-size: 360px; }
-        @media (min-width: $layout-bp-m) { background-size: auto; }
+        background-size: contain;
     }
 
     .hero__title {
-        margin: 0 0 30px;
+        margin: 0 0 1.25em;
         padding-left: 0;
         border-left: 0;
-        font-size: 22px;
+        font-size: 1.375em;
         @media (min-width: $layout-bp-xs) {
-            font-size: 32px;
+            font-size: 2em;
         }
         font-weight: 300;
         color: $color-ae-white;
@@ -36,9 +46,9 @@
             padding: .7em .9em;
             border: 0;
             background: #333;
-            font-size: 13px;
+            font-size: .875em;
             @media (min-width: $layout-bp-xs) {
-                font-size: 18px;
+                font-size: 1.125em;
             }
             color: $color-ae-white;
         }

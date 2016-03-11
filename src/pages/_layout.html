@@ -12,7 +12,7 @@
     {% include '_favicon.html' %}
 </head>
 <body>
-    <div class="layout__container">
+    <div class="layout__container {% block layoutExtraClass %}{% endblock %}">
         {% block header %}{% endblock %}
         {% block main %}{% endblock %}
     </div>

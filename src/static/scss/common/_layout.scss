@@ -1,6 +1,7 @@
-$layout-bp-xs: 480px;
-$layout-bp-s:  600px;
-$layout-bp-m:  1024px;
+$layout-bp-xs: 30em;  //  480px
+$layout-bp-s:  37.5em;  //  600px
+$layout-bp-m:  64em; // 1024px
+$aside-width:  13em;
 
 body {
     margin: 0;
@@ -15,45 +16,40 @@ body {
 }
 
 .layout__container {
-    margin: 0 10px;
+    padding: 0 .625em;
     @media (min-width: $layout-bp-xs) {
-        margin: 0 20px;
+        padding: 0 1.25em;
     }
     @media (min-width: $layout-bp-m) {
-        max-width: 1024px;
+        max-width: $layout-bp-m;
         margin: 0 auto;
     }
 }
 
 .layout__main,
 .layout__aside {
-    padding: 0 5px;
+    padding: 0 .3125em;
     @media (min-width: $layout-bp-xs) {
-        padding: 5px 20px;
+        padding: .3125em 1.25em;
     }
-    margin-bottom: 20px;
+    margin-bottom: 1.25em;
 }
 
-.layout__header {
-    @media (min-width: $layout-bp-s) {
-        height: 100px;
-    }
-}
-
-.layout__main {
-    @media (min-width: $layout-bp-xs) {
-        border: 1px solid $color-ae-white;
-        border-radius: 2px;
+.layout__container_has-aside {
+    @media (min-width: $layout-bp-m) {
+        padding-left: $aside-width;
     }
 
-    &.layout__main_has-hero {
-        padding: 0;
-        border: 0;
+    .layout__header {
+        margin-left: -$aside-width;
     }
-    &.layout__main_has-aside {
+    .layout__main {
+        @media (min-width: $layout-bp-xs) {
+            border: 1px solid $color-ae-white;
+            border-radius: .125em;
+        }
         @media (min-width: $layout-bp-m) {
             float: right;
-            max-width: 768px;
         }
     }
 }
@@ -63,6 +59,7 @@ body {
     @media screen and (min-width: $layout-bp-m) {
         display: block;
         float: left;
-        width: 256px;
+        width: $aside-width;
+        margin-left: -$aside-width;
     }
 }
