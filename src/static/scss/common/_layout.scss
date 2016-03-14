@@ -41,7 +41,9 @@ body {
     }
 
     .layout__header {
-        margin-left: -$aside-width;
+        @media (min-width: $layout-bp-m) {
+            margin-left: -($aside-width - 1em);
+        }
     }
     .layout__main {
         @media (min-width: $layout-bp-xs) {
