@@ -1,5 +1,5 @@
 .hero {
-    margin-bottom: 2em;
+    margin-bottom: 3em;
     padding: 2em;
     background: $color-ae-dark;
     text-align: center;
@@ -10,7 +10,7 @@
             position: absolute;
             left: 0;
             right: 0;
-            height: 30em;
+            height: 31em;
             background: $color-ae-dark;
             margin-top: -2em;
             z-index: -1;
@@ -51,6 +51,7 @@
                 font-size: 1.125em;
             }
             color: $color-ae-white;
+            overflow: hidden;
         }
     }
 }
