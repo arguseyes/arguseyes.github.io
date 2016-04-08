@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Argus Eyes — Guide</title>
-    <meta name="description" content="A lightweight CLI tool for visual regression testing">
+    <meta name="description" content="A lightweight CLI tool for visual regression testing: Argus Eyes captures screenshots for components over time and identifies visual differences with diff images">
+    <meta name="keywords" content="argus eyes, testing, visual regression, regression, automated, screenshots, captures, components, differences">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,400,400italic,700,700italic|Ubuntu+Mono:400,400italic,700">
@@ -49,6 +50,7 @@
             <li><a href="/" class="nav-main__item">Home</a></li>
             <li><a href="/guide.html" class="nav-main__item nav-main__item_is-active">Guide</a></li>
             <li><a href="/reference.html" class="nav-main__item">Reference</a></li>
+            <li><a href="http://github.com/arguseyes/argus-eyes/releases" class="nav-main__item" target="_blank">Releases</a></li>
             <li><a href="http://github.com/arguseyes/argus-eyes" class="nav-main__item nav-main__item_github" title="Github" target="_blank"></a></li>
         </ol>
     </nav>
@@ -62,12 +64,10 @@
 <h3 id="install">Install</h3>
 <ul>
 <li>Install <a href="http://nodejs.org/">Node.js</a>, at least v4</li>
-<li>Install <a href="http://www.imagemagick.org/">ImageMagick</a></li>
 <li>Install argus-eyes using npm:</li>
 </ul>
 <pre><code class="lang-bash">$ npm install argus-eyes -g
 </code></pre>
-<p><em>Note:</em><br>For OSX we recommend installing ImageMagick with <a href="http://brew.sh/">Homebrew</a>: <code>$ brew install imagemagick</code><br>For Windows we recommend install ImageMagick with <a href="https://chocolatey.org/">Chocolatey</a>: <code>$ choco install imagemagick</code></p>
 <h3 id="step-1-setup-config-file">Step 1: Setup config file</h3>
 <p>Before argus eyes can measure visual differences, it needs a list of pages and components. By
 default argus eyes expects an <strong><code>argus-eyes.json</code></strong> file in the current working directory.</p>
@@ -77,30 +77,30 @@ a name and a CSS-selector. Components can optionally take a list of selectors of
 appended to the component selector. See the Reference section for a more detailed format description.</p>
 <p><strong>Example config file:</strong></p>
 <pre><code class="lang-json">{
-  "<span class="hljs-attr">sizes</span>": [<span class="hljs-string">"320x480"</span>, <span class="hljs-string">"1280x768"</span>],
-  "<span class="hljs-attr">pages</span>": [ {
-      "<span class="hljs-attr">name</span>": <span class="hljs-string">"homepage"</span>,
-      "<span class="hljs-attr">url</span>": <span class="hljs-string">"http://localhost:3000/"</span>,
-      "<span class="hljs-attr">components</span>": [ <span class="hljs-string">"navigation"</span>, <span class="hljs-string">"news-items"</span> ]
+  <span class="hljs-attr">"sizes"</span>: [<span class="hljs-string">"320x480"</span>, <span class="hljs-string">"1280x768"</span>],
+  <span class="hljs-attr">"pages"</span>: [ {
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"homepage"</span>,
+      <span class="hljs-attr">"url"</span>: <span class="hljs-string">"http://localhost:3000/"</span>,
+      <span class="hljs-attr">"components"</span>: [ <span class="hljs-string">"navigation"</span>, <span class="hljs-string">"news-items"</span> ]
     }, {
-      "<span class="hljs-attr">name</span>": <span class="hljs-string">"contact"</span>,
-      "<span class="hljs-attr">url</span>": <span class="hljs-string">"http://localhost:3000/contact.html"</span>,
-      "<span class="hljs-attr">components</span>": [ <span class="hljs-string">"navigation"</span> ]
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"contact"</span>,
+      <span class="hljs-attr">"url"</span>: <span class="hljs-string">"http://localhost:3000/contact.html"</span>,
+      <span class="hljs-attr">"components"</span>: [ <span class="hljs-string">"navigation"</span> ]
     } ],
-  "<span class="hljs-attr">components</span>": [ {
-      "<span class="hljs-attr">name</span>": <span class="hljs-string">"navigation"</span>,
-      "<span class="hljs-attr">selector</span>": <span class="hljs-string">".nav"</span>
+  <span class="hljs-attr">"components"</span>: [ {
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"navigation"</span>,
+      <span class="hljs-attr">"selector"</span>: <span class="hljs-string">".nav"</span>
     }, {
-      "<span class="hljs-attr">name</span>": <span class="hljs-string">"news-items"</span>,
-      "<span class="hljs-attr">selector</span>": <span class="hljs-string">".news-items"</span>,
-      "<span class="hljs-attr">ignore</span>": [ <span class="hljs-string">".last-updated"</span> ]
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"news-items"</span>,
+      <span class="hljs-attr">"selector"</span>: <span class="hljs-string">".news-items"</span>,
+      <span class="hljs-attr">"ignore"</span>: [ <span class="hljs-string">".last-updated"</span> ]
     } ]
 }
 </code></pre>
 <h3 id="step-2-take-screenshots">Step 2: Take screenshots</h3>
 <p>After setting up the JSON, argus eyes can be put to work. Let&#39;s create your first set of screenshots of the components
-we specified. To do that, you can use the <strong><code>argus-eyes add</code></strong> command:</p>
-<pre><code class="lang-bash">$ argus-eyes add &lt;name&gt;
+we specified. To do that, you can use the <strong><code>argus-eyes capture</code></strong> command:</p>
+<pre><code class="lang-bash">$ argus-eyes capture &lt;name&gt;
 </code></pre>
 <p>It&#39;s best to name your set of screenshots semantically, after your current git branch for example.</p>
 <p>Argus eyes now creates a folder called <strong><code>.argus-eyes/&lt;name&gt;/</code></strong>, and saves the screenshots of all components specified
@@ -118,10 +118,10 @@ images of the offending components, highlighting their differences in red.</p>
 <p>Argus eyes is especially useful for checking visual regression between different branches. Say you&#39;re working on a
 feature branch and you want to make sure your changes have no unintended side effects:</p>
 <p><strong>On the <code>feature/navigation</code> branch:</strong></p>
-<pre><code class="lang-bash">$ argus-eyes add feature/navigation
+<pre><code class="lang-bash">$ argus-eyes capture feature/navigation
 </code></pre>
 <p><strong>On the <code>develop</code> branch:</strong></p>
-<pre><code class="lang-bash">$ argus-eyes add develop
+<pre><code class="lang-bash">$ argus-eyes capture develop
 $ argus-eyes compare develop feature/navigation
 </code></pre>
 <p>If any differences are found, the visual diff images are stored in <strong><code>.argus-eyes/diff_develop_feature-navigation/</code></strong>

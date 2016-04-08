@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Argus Eyes</title>
-    <meta name="description" content="A lightweight CLI tool for visual regression testing">
+    <meta name="description" content="A lightweight CLI tool for visual regression testing: Argus Eyes captures screenshots for components over time and identifies visual differences with diff images">
+    <meta name="keywords" content="argus eyes, testing, visual regression, regression, automated, screenshots, captures, components, differences">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,400,400italic,700,700italic|Ubuntu+Mono:400,400italic,700">
@@ -45,6 +46,7 @@
             <li><a href="/" class="nav-home__item nav-home__item_is-active">Home</a></li>
             <li><a href="/guide.html" class="nav-home__item">Guide</a></li>
             <li><a href="/reference.html" class="nav-home__item">Reference</a></li>
+            <li><a href="http://github.com/arguseyes/argus-eyes/releases" class="nav-home__item" target="_blank">Releases</a></li>
             <li><a href="http://github.com/arguseyes/argus-eyes" class="nav-home__item nav-home__item_github" title="Github" target="_blank"></a></li>
         </ol>
     </nav>
@@ -68,7 +70,7 @@
 <li>Create images of the visual differences</li>
 </ol>
 <p>Screenshots are caputured with <a href="http://phantomjs.org/">PhantomJS</a>, comparing sceenshots is done using
-<a href="http://www.imagemagick.org/">ImageMagick</a>.
+<a href="http://yahoo.github.io/blink-diff/">Blink-diff</a>.
 <!-- end --></p>
 
             <!-- start -->
@@ -77,11 +79,11 @@
 Argus eyes works by going over a straightforward JSON file containing the resolutions you want to capture, as well as
 the pages with their url&#39;s, and the components with their CSS-selectors.</p>
 <p>Once argus eyes knows where to find the components, it&#39;s time for some command line action. The first command you want
-to use is <code>$ argus-eyes add master</code>. This makes argus eyes go over the config file and take screenshots of
+to use is <code>$ argus-eyes capture master</code>. This makes argus eyes go over the config file and take screenshots of
 all specified components in there. The screenshots are saved in <strong><code>.argus-eyes/master</code></strong> and this set of screenshots can
 be compared with another set.</p>
 <p>Say you want to compare the components in your dev branch with those in your master branch. Now is the time to switch
-branches and do a new <code>$ argus-eyes add dev</code>.</p>
+branches and do a new <code>$ argus-eyes capture dev</code>.</p>
 <p>To compare the 2 sets you run <code>$ argus-eyes compare master dev</code>, that&#39;s it! Argus eyes now checks all supposedly
 identical screenshots for visual differences. If differences were found, a new folder <strong><code>.argus-eyes/diff_master_dev</code></strong>
 is created. This folder contains overlay-images of the offending components, highlighting their differences in red.

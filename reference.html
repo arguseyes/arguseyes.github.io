@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Argus Eyes — Reference documentation</title>
-    <meta name="description" content="A lightweight CLI tool for visual regression testing">
+    <meta name="description" content="A lightweight CLI tool for visual regression testing: Argus Eyes captures screenshots for components over time and identifies visual differences with diff images">
+    <meta name="keywords" content="argus eyes, testing, visual regression, regression, automated, screenshots, captures, components, differences">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,400,400italic,700,700italic|Ubuntu+Mono:400,400italic,700">
@@ -49,6 +50,7 @@
             <li><a href="/" class="nav-main__item">Home</a></li>
             <li><a href="/guide.html" class="nav-main__item">Guide</a></li>
             <li><a href="/reference.html" class="nav-main__item nav-main__item_is-active">Reference</a></li>
+            <li><a href="http://github.com/arguseyes/argus-eyes/releases" class="nav-main__item" target="_blank">Releases</a></li>
             <li><a href="http://github.com/arguseyes/argus-eyes" class="nav-main__item nav-main__item_github" title="Github" target="_blank"></a></li>
         </ol>
     </nav>
@@ -94,13 +96,14 @@ in <a href="#options">Options</a>.</p>
   finished-when: <span class="hljs-built_in">String</span>  <span class="hljs-comment">// [Optional] Valid JavaScript return statement</span>
 }
 </code></pre>
+<h4 id="finished-when">Finished when</h4>
 <p>If provided, the <code>finished-when</code> string must contain a return statement that evaluates to <code>true</code> whenever the page is
 ready to be captured, <code>false</code> if it&#39;s not yet. If omitted, it defaults to <code>return true</code>. Internally, this string is
 passed as the only argument to the
 <a href="http://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function"><code>Function()</code> function</a>,
 thus an entire function body is expected and multiple lines are allowed.</p>
 <h3 id="usage">Usage</h3>
-<h4 id="add">Add</h4>
+<h4 id="capture">Capture</h4>
 <p>Run argus eyes and save all the screenshots under <strong><code>.argus-eyes/&lt;name&gt;/</code></strong></p>
 <h4 id="compare">Compare</h4>
 <p>Compare the two sets of screenshots, creating overlay-images and reporting any difference. The process will exit with
@@ -109,15 +112,15 @@ code 0 when no significant differences were found, code 1 when differences were 
 <p>Run a config file syntax and test. It parses the config file and either reports <em>Config valid</em> or detailed information
 about the error.</p>
 <h3 id="options">Options</h3>
-<p>Argus eyes can take several optional arguments on the CLI. Because <code>add</code> and <code>compare</code> take positional arguments, any
+<p>Argus eyes can take several optional arguments on the CLI. Because <code>capture</code> and <code>compare</code> take positional arguments, any
 of these options must be placed last.</p>
 <h4 id="config-file">Config file</h4>
 <p><em>Default:</em> <strong><code>argus-eyes.json</code></strong></p>
 <p>Use a different config file.</p>
-<pre><code class="lang-bash">$ argus-eyes add feature/navigation --config=config.json
+<pre><code class="lang-bash">$ argus-eyes capture feature/navigation --config=config.json
 </code></pre>
 <h4 id="threshold">Threshold</h4>
-<p><em>Default:</em> 2</p>
+<p><em>Default:</em> 0</p>
 <p>Set the threshold for comparison differences, expects a percentage between 0 and 100. If the difference between 2 files
 is bigger than this percentage, it will be treated as different and reported as such.</p>
 <p>When comparing screenshots, argus eyes checks if all pixels in screenshots are identical. The difference is calculated
@@ -127,24 +130,28 @@ different when this percentage exceeds the threshold percentage.</p>
 increasing the threshold, since that will also increase the chance of unintended changes getting through.</p>
 <pre><code class="lang-bash">$ argus-eyes compare develop feature/navigation --threshold=10
 </code></pre>
+<h4 id="concurrency">Concurrency</h4>
+<p><em>Default:</em> 10</p>
+<p>Set the number of PhantomJS instances to run in parallel. This must be a number between 1 and 100. A single PhantomJS
+instance is used for every page, not for every component. Screenshots of components are captured synchronously.</p>
+<p><strong>Be advised</strong>: At this moment only the <a href="#capture">Capture</a> uses this option, since PhantomJS is the biggest performance
+hit. The <a href="#compare">Compare</a> action might be using this in the future as well.</p>
+<pre><code class="lang-bash">$ argus-eyes capture feature/navigation --concurrency=25
+</code></pre>
+<p><strong>Be advised</strong>: A higher concurrency isn’t always the better option. Be careful with increasing the concurrency,
+PhantomJS takes a lot of memory and it will affect the performance negatively if you run out of memory.</p>
 <h4 id="base">Base</h4>
 <p><em>Default:</em> <strong><code>.argus-eyes</code></strong></p>
 <p>Use a different base directory for storing the screenshots and comparison results.</p>
-<pre><code class="lang-bash">$ argus-eyes add develop --base==visual-regression
-</code></pre>
-<h4 id="imagemagick">ImageMagick</h4>
-<p>Set the path where the ImageMagick <code>compare</code>, <code>convert</code> and <code>identify</code> executables can be found. This path needs to end
-with a slash (or backslash on Windows). It is empty by default, expecting the executables in your <code>PATH</code> variable.</p>
-<pre><code class="lang-bash">$ argus-eyes add develop --im=<span class="hljs-string">"/usr/local/Cellar/imagemagick/6.9.2-5/bin/"</span>
-$ argus-eyes add develop --im=<span class="hljs-string">"C:\Program Files\ImageMagick\"</span>
+<pre><code class="lang-bash">$ argus-eyes capture develop --base==visual-regression
 </code></pre>
 <h4 id="verbose">Verbose</h4>
-<p>Turn on verbose output.</p>
+<p>Turn on verbose output. All output is prefixed with a date string in simplified ISO 8601 format.</p>
 <pre><code class="lang-bash">$ argus-eyes compare develop feature/navigation --verbose
 </code></pre>
 <h4 id="no-color">No color</h4>
 <p>Turn off colored output. Output is colored by default.</p>
-<pre><code class="lang-bash">$ argus-eyes add develop --no-color
+<pre><code class="lang-bash">$ argus-eyes capture develop --no-color
 </code></pre>
 <h4 id="help">Help</h4>
 <p>Print usage information.</p>
@@ -167,11 +174,14 @@ $ argus-eyes add develop --im=<span class="hljs-string">"C:\Program Files\ImageM
             <li class="nav-aside_lvl2">
                     <a href="#config">Config</a>
                 </li>
+            <li class="nav-aside_lvl3">
+                    <a href="#finished-when">Finished when</a>
+                </li>
             <li class="nav-aside_lvl2">
                     <a href="#usage">Usage</a>
                 </li>
             <li class="nav-aside_lvl3">
-                    <a href="#add">Add</a>
+                    <a href="#capture">Capture</a>
                 </li>
             <li class="nav-aside_lvl3">
                     <a href="#compare">Compare</a>
@@ -189,10 +199,10 @@ $ argus-eyes add develop --im=<span class="hljs-string">"C:\Program Files\ImageM
                     <a href="#threshold">Threshold</a>
                 </li>
             <li class="nav-aside_lvl3">
-                    <a href="#base">Base</a>
+                    <a href="#concurrency">Concurrency</a>
                 </li>
             <li class="nav-aside_lvl3">
-                    <a href="#imagemagick">ImageMagick</a>
+                    <a href="#base">Base</a>
                 </li>
             <li class="nav-aside_lvl3">
                     <a href="#verbose">Verbose</a>
