@@ -67,41 +67,105 @@ sizes, pages and components. You can specify a different location file using the
 in <a href="#options">Options</a>.</p>
 <p>The config needs to be valid <a href="http://www.json.org/">JSON</a>, and it needs to obey this format specification:</p>
 <pre><code class="lang-js">{
-  sizes: [
-    <span class="hljs-built_in">String</span>               <span class="hljs-comment">// Size string, example: "1024x768"</span>
+  <span class="hljs-string">"sizes"</span>: [
+    <span class="hljs-built_in">String</span>                       <span class="hljs-comment">// Size string, example: "1024x768"</span>
     <span class="hljs-comment">// ...</span>
   ],
-  pages: [
+  <span class="hljs-string">"pages"</span>: [
     {
-      name: <span class="hljs-built_in">String</span>,      <span class="hljs-comment">// Identifier, used in filenames</span>
-      url: <span class="hljs-built_in">String</span>,       <span class="hljs-comment">// Valid URL</span>
-      components: [
-        <span class="hljs-built_in">String</span>           <span class="hljs-comment">// Component identifier</span>
+      <span class="hljs-string">"name"</span>: <span class="hljs-built_in">String</span>,            <span class="hljs-comment">// Identifier, used in filenames</span>
+      <span class="hljs-string">"url"</span>: <span class="hljs-built_in">String</span>,             <span class="hljs-comment">// Valid URL</span>
+      <span class="hljs-string">"components"</span>: [
+        <span class="hljs-built_in">String</span>                   <span class="hljs-comment">// Component identifiers</span>
         <span class="hljs-comment">// ...</span>
-      ]
+      ],
+      <span class="hljs-string">"wait-for-delay"</span>: <span class="hljs-built_in">Number</span>,  <span class="hljs-comment">// [Optional] Number of milliseconds to wait</span>
+      <span class="hljs-string">"wait-for-script"</span>: <span class="hljs-built_in">String</span>, <span class="hljs-comment">// [Optional] Path to JS file with function body</span>
+      <span class="hljs-string">"run-script"</span>: <span class="hljs-built_in">String</span>       <span class="hljs-comment">// [Optional] Path to JS file with script</span>
     }
     <span class="hljs-comment">// ...</span>
   ],
-  components: [
+  <span class="hljs-string">"components"</span>: [
     {
-      name: <span class="hljs-built_in">String</span>,      <span class="hljs-comment">// Identifier, used in page objects and filenames</span>
-      selector: <span class="hljs-built_in">String</span>,  <span class="hljs-comment">// CSS selector, to clip the screenshot</span>
-      ignore: [          <span class="hljs-comment">// Optional array of excluded child elements</span>
-        <span class="hljs-built_in">String</span>           <span class="hljs-comment">// CSS selector, to `display:none` a child element</span>
+      <span class="hljs-string">"name"</span>: <span class="hljs-built_in">String</span>,            <span class="hljs-comment">// Identifier, used in page objects and filenames</span>
+      <span class="hljs-string">"selector"</span>: <span class="hljs-built_in">String</span>,        <span class="hljs-comment">// CSS selector, to clip the screenshot</span>
+      <span class="hljs-string">"ignore"</span>: [                <span class="hljs-comment">// [Optional] Array of excluded child elements</span>
+        <span class="hljs-built_in">String</span>                   <span class="hljs-comment">// CSS selector, to `display:none` a child element</span>
         <span class="hljs-comment">// ...</span>
-      ]
+      ],
+      <span class="hljs-string">"wait-for-delay"</span>: <span class="hljs-built_in">Number</span>,  <span class="hljs-comment">// [Optional] Number of milliseconds to wait</span>
+      <span class="hljs-string">"wait-for-script"</span>: <span class="hljs-built_in">String</span>, <span class="hljs-comment">// [Optional] Path to JS file with function body</span>
+      <span class="hljs-string">"run-script"</span>: <span class="hljs-built_in">String</span>       <span class="hljs-comment">// [Optional] Path to JS file with script</span>
     }
     <span class="hljs-comment">// ...</span>
   ],
-  finished-when: <span class="hljs-built_in">String</span>  <span class="hljs-comment">// [Optional] Valid JavaScript return statement</span>
+  <span class="hljs-string">"wait-for-delay"</span>: <span class="hljs-built_in">Number</span>,      <span class="hljs-comment">// [Optional] Number of milliseconds to wait</span>
+  <span class="hljs-string">"wait-for-script"</span>: <span class="hljs-built_in">String</span>,     <span class="hljs-comment">// [Optional] Path to JS file with function body</span>
+  <span class="hljs-string">"run-script"</span>: <span class="hljs-built_in">String</span>,          <span class="hljs-comment">// [Optional] Path to JS file with script</span>
+  <span class="hljs-string">"credentials"</span>: <span class="hljs-built_in">String</span>,         <span class="hljs-comment">// [Optional] HTTP Basic auth, example: "john:secret"</span>
+  <span class="hljs-string">"phantomjs-flags"</span>: [           <span class="hljs-comment">// [Optional] Array of PhantomJS flags</span>
+    <span class="hljs-built_in">String</span>                       <span class="hljs-comment">// PhantomJS CLI flag</span>
+    <span class="hljs-comment">// ...</span>
+  ]
 }
 </code></pre>
-<h4 id="finished-when">Finished when</h4>
-<p>If provided, the <code>finished-when</code> string must contain a return statement that evaluates to <code>true</code> whenever the page is
-ready to be captured, <code>false</code> if it&#39;s not yet. If omitted, it defaults to <code>return true</code>. Internally, this string is
-passed as the only argument to the
-<a href="http://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function"><code>Function()</code> function</a>,
-thus an entire function body is expected and multiple lines are allowed.</p>
+<p>By default, argus eyes takes the screenshots after the <code>window.onload</code> event. When parts of your site are still being
+loaded after that, you&#39;ll need to tell argus eyes what to wait for. This way you can make sure that everything has
+finished loading, rendering and animating at the moment the screenshot is taken.</p>
+<p>To simply wait for a fixed time, use <code>wait-for-delay</code>. For more complex conditions, you can write JavaScript that
+returns a truthy value whenever the page is ready: see <code>wait-for-script</code>. If you&#39;ve got any one-time actions such as
+components to activate or dialogs to close, you should use <code>run-script</code>.</p>
+<p>You are allowed to specify <code>wait-for-delay</code>, <code>wait-for-script</code> and <code>run-script</code> on 3 levels: global, page and component.
+The highest delay is executed first, then all <code>wait-for-script</code> files in order, then all <code>run-script</code> files.</p>
+<p><strong>Be advised</strong>: There&#39;s a global timeout of 10 seconds on the internal PhantomJS script, the screenshots of all
+components on a page should be taken within that time.</p>
+<h4 id="wait-for-delay">Wait for delay</h4>
+<p>This will delay taking the screenshots, specify the milliseconds as a JavaScript number. When multiple delays are found
+only the highest delay is executed, the others are discarded.</p>
+<h4 id="wait-for-script">Wait for script</h4>
+<p>You can specify a JavaScript function body to tell argus eyes whenever the page and it&#39;s components are finished loading.
+The <code>wait-for-script</code> string must contain a filename. If a relative path is given, it&#39;s relative to your config file.</p>
+<p>Multiple scripts will be executed in the order: global, page, component.</p>
+<p>The contents of the script can be seen as a function body, without the <code>function() {</code> and <code>}</code> parts around it. You are
+required to return a truthy value to indicate argus eyes can take the screenshot. Your function is <strong>invoked
+continuously</strong> until it returns something truthy, so be careful with saving state.</p>
+<p>Internally, the contents of the file are passed as a string to the
+<a href="http://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function"><code>Function()</code> constructor</a>,
+thus an entire function body as a string is expected, and multiple lines are allowed.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="lang-json">{ <span class="hljs-attr">"wait-for-script"</span>: <span class="hljs-string">"scripts/page-finished-loading.js"</span> }
+</code></pre>
+<p><strong>scripts/page-finished-loading.js:</strong></p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> isFinished = <span class="hljs-built_in">document</span>.body.hasAttribute(<span class="hljs-string">'data-finished-loading'</span>);
+<span class="hljs-keyword">return</span> isFinished;
+</code></pre>
+<h4 id="run-script">Run script</h4>
+<p>The <code>run-script</code> option differs from <code>wait-for-script</code> in that it&#39;s only executed once, after any <code>wait-for-script</code>
+and <code>wait-for-delay</code>.</p>
+<p>Multiple scripts will be executed in the order: global, page, component.</p>
+<p>Internally, the contents of the file are passed as a string to the
+<a href="http://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function"><code>Function()</code> constructor</a>,
+thus an entire function body as a string is expected, and multiple lines are allowed.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="lang-json">{ <span class="hljs-attr">"run-script"</span>: <span class="hljs-string">"scripts/component-search-open.js"</span> }
+</code></pre>
+<p><strong>scripts/component-search-open.js:</strong></p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> search = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'.header__search'</span>);
+search.classList.add(<span class="hljs-string">'.header__search_is-open'</span>);
+</code></pre>
+<h4 id="credentials">Credentials</h4>
+<p>It&#39;s possible to specify credentials to be used as HTTP Basic authentication. A string with the username and password
+separated by a colon (<code>:</code>) is expected.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="lang-json">{ <span class="hljs-attr">"credentials"</span>: <span class="hljs-string">"john:secret"</span> }
+</code></pre>
+<h4 id="phantomjs-flags">PhantomJS flags</h4>
+<p>If you need to specify any PhantomJS commandline flags, it&#39;s possible to do so as an array of strings. See the official
+<a href="http://phantomjs.org/api/command-line.html">PhantomJS CLI documentation</a> for all supported CLI options. If any relative
+paths are given, they&#39;re relative to your config file.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="lang-json">{ <span class="hljs-attr">"phantomjs-flags"</span>: [<span class="hljs-string">"--load-images=false"</span>] }
+</code></pre>
 <h3 id="usage">Usage</h3>
 <h4 id="capture">Capture</h4>
 <p>Run argus eyes and save all the screenshots under <strong><code>.argus-eyes/&lt;name&gt;/</code></strong></p>
@@ -175,7 +239,19 @@ PhantomJS takes a lot of memory and it will affect the performance negatively if
                     <a href="#config">Config</a>
                 </li>
             <li class="nav-aside_lvl3">
-                    <a href="#finished-when">Finished when</a>
+                    <a href="#wait-for-delay">Wait for delay</a>
+                </li>
+            <li class="nav-aside_lvl3">
+                    <a href="#wait-for-script">Wait for script</a>
+                </li>
+            <li class="nav-aside_lvl3">
+                    <a href="#run-script">Run script</a>
+                </li>
+            <li class="nav-aside_lvl3">
+                    <a href="#credentials">Credentials</a>
+                </li>
+            <li class="nav-aside_lvl3">
+                    <a href="#phantomjs-flags">PhantomJS flags</a>
                 </li>
             <li class="nav-aside_lvl2">
                     <a href="#usage">Usage</a>
