@@ -82,8 +82,9 @@ function getReadmeSections(markdown) {
     return {
         overview: parts[0],
         introduction: parts[1],
-        guide: parts[2],
-        reference: parts[3]
+        authors: parts[2],
+        guide: parts[3],
+        reference: parts[4]
     };
 }
 
